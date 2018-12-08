@@ -9,11 +9,11 @@ services:
             # You can adapt the port you want Paperless to listen on by
             # modifying the part before the `:`.
             - "8000:8000"
-        healthcheck:
-            test: ["CMD", "curl" , "-f", "http://localhost:8000"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
+        #healthcheck:
+        #    test: ["CMD", "curl" , "-f", "http://localhost:8000"]
+        #    interval: 30s
+        #    timeout: 10s
+        #    retries: 5
         volumes:
             - data:/usr/src/paperless/data
             - media:/usr/src/paperless/media
@@ -31,8 +31,8 @@ services:
         # uncomment the following line to start automatically on system boot
         # restart: always
         depends_on:
-            webserver:
-                condition: service_healthy
+            - webserver
+                #condition: service_healthy
         volumes:
             - data:/usr/src/paperless/data
             - media:/usr/src/paperless/media
