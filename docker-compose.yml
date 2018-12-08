@@ -3,8 +3,7 @@ version: '2'
 services:
     webserver:
         image: danielquinn/paperless
-        # uncomment the following line to start automatically on system boot
-        # restart: always
+        restart: always
         ports:
             # You can adapt the port you want Paperless to listen on by
             # modifying the part before the `:`.
@@ -28,8 +27,7 @@ services:
 
     consumer:
         image: danielquinn/paperless
-        # uncomment the following line to start automatically on system boot
-        # restart: always
+        restart: always
         depends_on:
             - webserver
                 #condition: service_healthy
