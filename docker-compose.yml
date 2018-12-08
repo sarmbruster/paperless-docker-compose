@@ -47,6 +47,6 @@ services:
         command: ["document_consumer"]
 
 volumes:
-    data: /mnt/nfs-1/paperless/data
-    media: /mnt/nfs-1/paperless/media
-    consume: /mnt/nfs-1/paperless/consume
+    data:/mnt/nfs-1/paperless/data
+    media:/mnt/nfs-1/paperless/media
+    consume:/mnt/nfs-1/paperless/consume
