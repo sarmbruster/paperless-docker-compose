@@ -14,8 +14,8 @@ services:
         #    timeout: 10s
         #    retries: 5
         volumes:
-            - data:/usr/src/paperless/data
-            - media:/usr/src/paperless/media
+            - paperless_data:/usr/src/paperless/data
+            - paperless_media:/usr/src/paperless/media
         #env_file: docker-compose.env
         # The reason the line is here is so that the webserver that doesn't do
         # any text recognition and doesn't have to install unnecessary
@@ -32,11 +32,11 @@ services:
             - webserver
                 #condition: service_healthy
         volumes:
-            - data:/usr/src/paperless/data
-            - media:/usr/src/paperless/media
+            - paperless_data:/usr/src/paperless/data
+            - paperless_media:/usr/src/paperless/media
             # You have to adapt the local path you want the consumption
             # directory to mount to by modifying the part before the ':'.
-            - consume:/consume
+            - paperless_consume:/consume
             # Likewise, you can add a local path to mount a directory for
             # exporting. This is not strictly needed for paperless to
             # function, only if you're exporting your files: uncomment
@@ -47,6 +47,9 @@ services:
         command: ["document_consumer"]
 
 volumes:
-    - data:/mnt/nfs-1/paperless/data
-    - media:/mnt/nfs-1/paperless/media
-    - consume:/mnt/nfs-1/paperless/consume
+    paperless_data:
+        external: true
+    paperless_consume:
+        external: true
+    paperless_media:
+        external: true
