@@ -16,6 +16,8 @@ services:
         volumes:
             - paperless_data:/usr/src/paperless/data
             - paperless_media:/usr/src/paperless/media
+            - paperless_consume:/consume
+            - paperless_export:/export
         #env_file: docker-compose.env
         # The reason the line is here is so that the webserver that doesn't do
         # any text recognition and doesn't have to install unnecessary
@@ -43,6 +45,7 @@ services:
             # it and fill in a local path if you know you're going to
             # want to export your documents.
             # - /path/to/another/arbitrary/place:/export
+            - paperless_export:/export
         #env_file: docker-compose.env
         command: ["document_consumer"]
 
@@ -52,4 +55,6 @@ volumes:
     paperless_consume:
         external: true
     paperless_media:
+        external: true
+    paperless_export:
         external: true
