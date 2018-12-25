@@ -57,7 +57,7 @@ services:
         image: stefda/rsync
         restart: always
         volumes:
-            - paperless:/volume
+            - paperless_consume:/volume
         #environment:
         #    VOLUME: /var/www/app
         #    USER: www-data
