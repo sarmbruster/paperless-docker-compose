@@ -53,6 +53,16 @@ services:
         environment:
             - USERMAP_UID=1001
             - USERMAP_GID=1002
+    rsync:
+        image: stefda/rsync
+        volumes:
+            - paperless:/volume
+        #environment:
+        #    VOLUME: /var/www/app
+        #    USER: www-data
+        #    GROUP: www-data
+        #ports:
+        #    - "873:873"
 
 volumes:
     paperless_data:
