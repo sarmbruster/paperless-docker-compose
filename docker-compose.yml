@@ -14,10 +14,10 @@ services:
         #    timeout: 10s
         #    retries: 5
         volumes:
-            - paperless_data:/usr/src/paperless/data
-            - paperless_media:/usr/src/paperless/media
-            - paperless_consume:/consume
-            - paperless_export:/export
+            - paperless_data:/usr/src/paperless/data:nocopy
+            - paperless_media:/usr/src/paperless/media:nocopy
+            - paperless_consume:/consume:nocopy
+            - paperless_export:/export:nocopy
         #env_file: docker-compose.env
         # The reason the line is here is so that the webserver that doesn't do
         # any text recognition and doesn't have to install unnecessary
@@ -25,6 +25,8 @@ services:
         # value with nothing.
         environment:
             - PAPERLESS_OCR_LANGUAGES=
+            #- USERMAP_UID=1001
+            #- USERMAP_GID=1002
         command: ["runserver", "--insecure", "--noreload", "0.0.0.0:8000"]
 
     consumer:
@@ -34,20 +36,23 @@ services:
             - webserver
                 #condition: service_healthy
         volumes:
-            - paperless_data:/usr/src/paperless/data
-            - paperless_media:/usr/src/paperless/media
+            - paperless_data:/usr/src/paperless/data:nocopy
+            - paperless_media:/usr/src/paperless/media:nocopy
             # You have to adapt the local path you want the consumption
             # directory to mount to by modifying the part before the ':'.
-            - paperless_consume:/consume
+            - paperless_consume:/consume:nocopy
             # Likewise, you can add a local path to mount a directory for
             # exporting. This is not strictly needed for paperless to
             # function, only if you're exporting your files: uncomment
             # it and fill in a local path if you know you're going to
             # want to export your documents.
             # - /path/to/another/arbitrary/place:/export
-            - paperless_export:/export
+            - paperless_export:/export:nocopy
         #env_file: docker-compose.env
         command: ["document_consumer"]
+        environment:
+            #- USERMAP_UID=1001
+            #- USERMAP_GID=1002
 
 volumes:
     paperless_data:
