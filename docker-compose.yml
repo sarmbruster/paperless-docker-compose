@@ -50,7 +50,7 @@ services:
             - paperless_export:/export:nocopy
         #env_file: docker-compose.env
         command: ["document_consumer"]
-        environment:
+        #environment:
             #- USERMAP_UID=1001
             #- USERMAP_GID=1002
 
