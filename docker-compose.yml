@@ -55,14 +55,15 @@ services:
             - USERMAP_GID=1002
     rsync:
         image: stefda/rsync
+        restart: always
         volumes:
             - paperless:/volume
         #environment:
         #    VOLUME: /var/www/app
         #    USER: www-data
         #    GROUP: www-data
-        #ports:
-        #    - "873:873"
+        ports:
+            - "873:873"
 
 volumes:
     paperless_data:
