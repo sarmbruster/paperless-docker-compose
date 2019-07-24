@@ -2,8 +2,8 @@ version: '2'
 
 services:
     webserver:
-        image: stgarf/paperless:v2.7.0-convert_fix
-        #image: danielquinn/paperless
+        #image: stgarf/paperless:v2.7.0-convert_fix # old image
+        image: thepaperlessproject/paperless
         restart: always
         ports:
             # You can adapt the port you want Paperless to listen on by
@@ -31,8 +31,7 @@ services:
         command: ["runserver", "--insecure", "--noreload", "0.0.0.0:8000"]
 
     consumer:
-        image: stgarf/paperless:v2.7.0-convert_fix
-        #image: danielquinn/paperless
+        image: thepaperlessproject/paperless
         restart: always
         depends_on:
             - webserver
@@ -53,6 +52,7 @@ services:
         #env_file: docker-compose.env
         command: ["document_consumer"]
         environment:
+            - PAPERLESS_OCR_LANGUAGES=deu eng
             - USERMAP_UID=1001
             - USERMAP_GID=1002
     rsync:
