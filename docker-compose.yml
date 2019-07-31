@@ -55,11 +55,15 @@ services:
             - PAPERLESS_OCR_LANGUAGES=deu eng
             - USERMAP_UID=1001
             - USERMAP_GID=1002
+	tmpfs:
+	    - /tmp
     rsync:
         image: stefda/rsync
         restart: always
         volumes:
             - paperless_consume:/volume
+	tmpfs:
+	    - /tmp
         #environment:
         #    VOLUME: /var/www/app
         #    USER: www-data
